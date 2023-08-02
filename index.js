@@ -1,24 +1,30 @@
 import { createReadStream, stat } from 'fs';
-import Koa from 'koa'
+import Koa, { HttpError } from 'koa'
 import jwt from 'koa-jwt';
 import { extname, resolve } from "path"
 import { promisify } from 'util';
 
 const app = new Koa()
 
+
+
 app.use(jwt({secret: 'mysecret', algorithms: ['HS256', 'HS512'], getToken({request}) {
     return request.query.token
 }}))
 
+app.use(({request}, next) => {
+    if (!request.url.startsWith('/api/video') || !request.query.video || !request.query.video.match(/^[a-zA-Z0-9-_ ]+\.(mp4|mov)$/i)
+    ) {
+        //throw new HttpError('Missing parameter')
+        return;
+    } else {
+        return next();
+    }
+})
 
 // I can use ctx instead request and response but i prefered unbuild for more clarity.
 app.use( async ({ request, response, state }, next) => {
-    if (!request.url.startsWith('/api/video') || !request.query.video || !request.query.video.match(/^[a-zA-Z0-9-_ ]+\.(mp4|mov)$/i)
-    ) {
-        return next();
-    }
-
-    const range = request.header.range;
+  const range = request.header.range;
     const video = resolve('video', request.query.video);
 
     if (!range) {
