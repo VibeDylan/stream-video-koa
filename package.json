@@ -10,9 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "@types/koa": "^2.13.8",
+    "@types/koa-jwt": "^3.3.0",
     "koa": "^2.14.2",
+    "koa-jwt": "^4.0.4",
     "nodemon": "^3.0.1"
   },
-  "devDependencies": {},
   "description": ""
 }
