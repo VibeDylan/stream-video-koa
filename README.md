@@ -4,27 +4,13 @@
 Make a local streaming video server with NodeJS and Koa.
 
 
-
+## Installation
 ```bash
 git clone https://github.com/VibeDylan/stream-video-koa.git
 ```
 ```bash
 npm install
 ```
-## Run
-
-```bash
-npx nodemon index.js
-```
-
-
-
-
-```bash
-git clone https://github.com/VibeDylan/stream-video-koa.git
-```
-```bash
-npm install
 ```
 ## Run
 
