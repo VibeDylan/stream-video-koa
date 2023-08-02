@@ -33,8 +33,6 @@ app.use( async ({ request, response, state }, next) => {
         return next();
     }
 
-    console.log(state)
-
     // return an array in two size
     const parts = range.replace("bytes=", "").split('-');
     const videoStat = await promisify(stat)(video);
